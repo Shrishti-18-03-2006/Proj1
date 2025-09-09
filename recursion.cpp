@@ -138,28 +138,96 @@ int main(){
     cout << "Factorial of the number is : " << fact(number) << endl;
     return 0;
 }
-*/
 
-// FUNCTIONAL RECURSION 
+
+
 // 1) Reverse an array  : Arr = [1 , 2 , 3 , 4 , 2]  :: Rev = [2 , 4 , 3 , 2 , 1]
    // recursion using two pointers
-int arr[100],n;
-void swp(int l = arr[0] , int r = arr[n-1]){
+
+void swp(int arr[],int l = 0 , int r = -1){
     if(l >= r) return ;
-    
     swap(arr[l] , arr[r]);
-    swp(l+1,r-1);
-    cout << arr[100];
+    swp(arr,l+1,r-1);
 }
 int main(){
-    int a[100],n;
-    cout << "Enter the size of array: ";
+    int n;
+    cout << "Enter the size of array :";
     cin >> n;
-    for(int i = 0 ; i<n ; i++){
-        cin >> a[i];
+    int arr[n];
+    int start = 0;
+    cout << "Enter the array : ";
+    for(int i = 0 ; i < n ; i++){
+        cin >> arr[i];
     }
-    swp(a[0],a[n-1]);
+    cout << "\nArray before reversing is : ";
+    for(int i = 0 ; i < n ; i++) cout << arr[i]<< " ";
+    cout << endl << endl;
+    swp(arr,start,n-1);
+
+    cout << "Array after reversing is : ";
+    for(int i = 0 ; i < n ; i++){
+        cout << arr[i] << " ";
+    }
+    cout << endl << endl;
     return 0;
 }
 
-// Hello there, I am changing this
+
+//Reversing the array using a single variable 
+void reverse(int arr[],int l,int n){
+    if(l >= n/2) return ;
+    swap(arr[l], arr[n-l-1]);
+    reverse(arr,l+1,n);
+
+}
+int main(){
+    int n;
+    cout << "Enter the size of array :";
+    cin >> n;
+    int a[n];
+    int start = 0;
+    cout << "Enter the array : ";
+    for(int i = 0 ; i < n ; i++) cin >> a[i];
+
+    cout << "\nArray before reversing is : ";
+    for(int i = 0 ; i < n ; i++) cout << a[i]<< " ";
+
+    reverse(a,start,n);
+
+    cout << "\nArray after reversing is : ";
+    for(int i = 0 ; i < n ; i++) cout << a[i] << " ";
+    cout << endl;
+    return 0;
+}
+
+
+// Check if the entered string is palindrome(on string on reversal is the same)
+//eg MADAM on reversing is MADAM
+//'11211' on reversal = '11211'
+bool palindrome_string(int i, string &st){
+    if(i >= st.size()/2) return true ; //recursive condition
+    if(st[i] != st[st.size()-i-1]) return false; //checks if the string is identical(palindrome)
+    return palindrome_string(i+1,st);
+}
+int main(){
+    string name;
+    cout << "Enter a word to check if palindrome : ";
+    cin >> name;
+    cout << palindrome_string(0,name) << endl;
+    return 0;    
+}
+*/
+
+//MULTIPLE RECURSION CALLS
+// The function is called multiple times -- twice or thrice or more
+// 1) FIBONACCI NUMBER ----> 0 1 1 2 3 5 8 13 21 34
+int fib_num(int n){
+    if(n <= 1) return n;
+    return fib_num(n-1)+fib_num(n-2);
+}
+int main(){
+    int x;
+    cout << "Enter a value to find xth fibonacci number :";
+    cin >> x;
+    cout << "The xth fibonacci number is : " << fib_num(x) << endl;
+}
